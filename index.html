@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A.Metlob — Soluções em Construção</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="https://use.typekit.net/xha7ssp.css" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #fdfdfd;
+      --gray: #6b6b6b;
+      --light: #f5f4f2;
+      --border: #d0cfc9;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--black);
+      background: var(--white);
+      overflow-x: hidden;
+      letter-spacing: -0.01em;
+    }
+
+    h1, h2, h3, .value-word, .section-label, .logo-m {
+      font-family: 'fractul-variable', sans-serif;
+      font-weight: 300 !important;
+    }
+
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a  { text-decoration: none; color: inherit; }
+
+    /* ─── NAVIGATION ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 3.5rem;
+      height: 68px;
+      background: rgba(10, 10, 10, 0.96);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      color: var(--white);
+      line-height: 1;
+    }
+    .logo-svg { width: auto; height: 24px; object-fit: contain; display: block; }
+    .logo-m   { font-size: 1.9rem; letter-spacing: .02em; color: var(--white); }
+    .logo-sub { font-size: .55rem; letter-spacing: .35em; font-weight: 300; opacity: .75; }
+    nav .logo-sub { display: none; }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+      justify-content: center;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,.82);
+      font-size: .82rem;
+      letter-spacing: .02em;
+      font-weight: 400;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .btn-cta {
+      background: var(--white);
+      color: var(--black);
+      border: none;
+      padding: .55rem 1.6rem;
+      font-size: .78rem;
+      letter-spacing: .04em;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 12px;
+      font-family: 'Montserrat', sans-serif;
+      transition: opacity .2s;
+      margin-left: auto;
+      white-space: nowrap;
+    }
+    .btn-cta:hover { opacity: .85; }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: flex-end;
+      padding: 5rem 3.5rem;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1800&q=85')
+        center / cover no-repeat;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,.72) 0%,
+        rgba(0,0,0,.25) 55%,
+        rgba(0,0,0,.08) 100%
+      );
+    }
+    .hero-content { position: relative; z-index: 1; color: var(--white); }
+    .hero-content h1 {
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -.01em;
+      max-width: 520px;
+    }
+
+    /* ─── ABOUT ──────────────────────────────────────────────── */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .about-img {
+      height: 520px;
+      background:
+        url('https://images.unsplash.com/photo-1600607687939-ce8a6f349b38?w=900&q=80')
+        center / cover;
+    }
+    .about-body {
+      padding: 5rem 4.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--white);
+    }
+    .about-body h2 { font-size: 1.35rem; font-weight: 600; margin-bottom: 1.4rem; }
+    .about-body p  {
+      font-size: .875rem;
+      line-height: 1.85;
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+    .about-body p:last-of-type { margin-bottom: 2.2rem; }
+
+    .btn-outline {
+      display: inline-block;
+      border: 1px solid var(--black);
+      padding: .6rem 1.8rem;
+      font-size: .78rem;
+      letter-spacing: .06em;
+      font-weight: 500;
+      width: fit-content;
+      border-radius: 12px;
+      transition: background .2s, color .2s;
+    }
+    .btn-outline:hover { background: var(--black); color: var(--white); }
+
+    /* ─── PROJECTS ───────────────────────────────────────────── */
+    .projects { padding: 5rem 3.5rem; }
+    .section-label {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      margin-bottom: 1.8rem;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .75rem;
+      margin-bottom: 2.5rem;
+    }
+    .project-card {
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+    .project-card img {
+      transition: transform .5s ease;
+    }
+    .project-card:hover img { transform: scale(1.05); }
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.75) 0%, transparent 55%);
+    }
+    .project-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.2rem 1.4rem;
+      color: var(--white);
+    }
+    .project-info h3 { font-size: .95rem; font-weight: 600; }
+    .project-info p  { font-size: .72rem; opacity: .75; margin-top: .2rem; }
+
+    .btn-row { display: flex; justify-content: center; }
+
+    /* ─── VALUES ─────────────────────────────────────────────── */
+    .values {
+      background: var(--black);
+      padding: 7rem 3.5rem;
+      color: var(--white);
+    }
+    .value-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 1.6rem;
+      line-height: 1;
+    }
+    .value-row + .value-row { margin-top: .6rem; }
+    .value-word {
+      font-size: clamp(3.2rem, 6.5vw, 6.2rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+    .value-tag {
+      font-size: .82rem;
+      letter-spacing: .08em;
+      text-transform: none;
+      color: rgba(255,255,255,.45);
+      line-height: 1.5;
+    }
+
+    /* ─── GALLERY ────────────────────────────────────────────── */
+    .gallery { padding: 5rem 3.5rem; }
+    .gallery-intro {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2rem;
+      align-items: start;
+      margin-bottom: 1.8rem;
+    }
+    .gallery-intro p {
+      font-size: .85rem;
+      line-height: 1.8;
+      color: var(--gray);
+    }
+
+    .gallery-mosaic {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: repeat(8, 110px);
+      gap: .6rem;
+      margin-bottom: 2rem;
+    }
+    .gallery-item.g1 { grid-column: 1; grid-row: 1 / span 6; }
+    .gallery-item.g2 { grid-column: 1; grid-row: 7 / span 2; }
+    .gallery-item.g3 { grid-column: 2; grid-row: 1 / span 3; }
+    .gallery-item.g4 { grid-column: 2; grid-row: 4 / span 3; }
+    .gallery-item.g5 { grid-column: 2; grid-row: 7 / span 2; }
+    .gallery-item.g6 { grid-column: 3; grid-row: 1 / span 2; }
+    .gallery-item.g7 { grid-column: 3; grid-row: 3 / span 2; }
+    .gallery-item.g8 { grid-column: 3; grid-row: 5 / span 2; }
+    .gallery-item.g9 { grid-column: 3; grid-row: 7 / span 2; }
+    .gallery-item { overflow: hidden; border-radius: 12px; }
+    .gallery-item img { transition: transform .5s ease; }
+    .gallery-item:hover img { transform: scale(1.06); }
+
+    /* ─── AREAS ──────────────────────────────────────────────── */
+    .areas {
+      background: var(--black);
+      padding: 5.5rem 3.5rem;
+      color: var(--white);
+    }
+    .areas > .section-label { margin-bottom: 4rem; }
+
+    .area-row {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      margin-bottom: 5rem;
+    }
+    .area-row:last-child { margin-bottom: 0; }
+    .area-row.reverse { flex-direction: row-reverse; }
+
+    .area-info { flex: 0 0 240px; }
+    .area-info small {
+      display: block;
+      font-size: .62rem;
+      letter-spacing: .2em;
+      text-transform: none;
+      opacity: .6;
+      margin-bottom: .5rem;
+    }
+    .area-info h3 { font-size: clamp(2rem, 3.5vw, 3.2rem); line-height: 1; }
+
+    .area-carousel {
+      flex: 1;
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+    .area-carousel::-webkit-scrollbar { display: none; }
+
+    .carousel-slide {
+      flex: 0 0 auto;
+      width: 240px;
+      height: 300px;
+      border-radius: 12px;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+    .carousel-slide.featured { width: 320px; }
+    .carousel-slide img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+    .carousel-slide:hover img { transform: scale(1.05); }
+
+    /* ─── CONTACT ────────────────────────────────────────────── */
+    .contact {
+      padding: 6rem 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .contact h2 {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -.015em;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-grid input,
+    .form-grid textarea {
+      font-family: 'Montserrat', sans-serif;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: .75rem 0;
+      font-size: .82rem;
+      outline: none;
+      background: transparent;
+      color: var(--black);
+      transition: border-color .2s;
+    }
+    .form-grid input:focus,
+    .form-grid textarea:focus { border-color: var(--black); }
+    .form-grid input::placeholder,
+    .form-grid textarea::placeholder { color: #aaa; }
+    .form-grid textarea {
+      grid-column: span 2;
+      resize: none;
+      height: 90px;
+    }
+    .btn-submit {
+      grid-column: span 2;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      padding: 1rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: .78rem;
+      letter-spacing: .1em;
+      text-transform: none;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: opacity .2s;
+    }
+    .btn-submit:hover { opacity: .8; }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      background: var(--black);
+      padding: 2.5rem 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-logo { color: var(--white); }
+    .footer-logo .logo-m  { font-size: 1.3rem; }
+    .footer-logo .logo-sub { font-size: .5rem; }
+
+    .footer-links {
+      position: static;
+      height: auto;
+      background: transparent;
+      backdrop-filter: none;
+      padding: 0;
+      z-index: auto;
+      display: flex;
+      gap: 2rem;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,.5);
+      font-size: .72rem;
+      letter-spacing: .05em;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,.9); }
+
+    /* ─── ANIMATIONS ─────────────────────────────────────────── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(36px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    nav { animation: fadeDown 0.5s ease-out both; }
+    .hero-content { animation: fadeUp 0.9s ease-out 0.3s both; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease-out, transform 0.65s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">
+      <img src="logoAME.png" alt="A.Metlob" class="logo-svg" />
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Portfolio</a></li>
+      <li><a href="#">Galeria</a></li>  
+      <li><a href="#">Sobre</a></li>
+      <li><a href="#">Contato</a></li>
+    </ul>
+    <button class="btn-cta">Fale conosco</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Soluções em<br>construção</h1>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="about-img"></div>
+    <div class="about-body">
+      <h2>Sobre nós</h2>
+      <p>
+        Antes de construir, a gente observa. Antes de executar, a gente
+        entende. Aqui na A.Metlob trabalhamos com técnica, estética e visão.
+      </p>
+      <p>
+        Confiança por gerações. Quando o cliente Aapwa à A.Metlob, pode
+        contar com um atendimento Carlos que transparece cuidado ao cuidar
+        de cada detalhe com carinho.
+      </p>
+      <a href="#" class="btn-outline">Ver mais</a>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects">
+    <p class="section-label">Projetos</p>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img
+          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80"
+          alt="Projeto residencial"
+        />
+        <div class="project-overlay"></div>
+        <div class="project-info">
+          <h3>Título</h3>
+          <p>Breve descrição do projeto aqui.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <img
+          src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&q=80"
+          alt="Projeto moderno"
+        />
+        <div class="project-overlay"></div>
+        <div class="project-info">
+          <h3>Título</h3>
+          <p>Breve descrição do projeto aqui.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <img
+          src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80"
+          alt="Projeto corporativo"
+        />
+        <div class="project-overlay"></div>
+        <div class="project-info">
+          <h3>Título</h3>
+          <p>Breve descrição do projeto aqui.</p>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <a href="#" class="btn-outline">Ver mais projetos</a>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values">
+    <div class="value-row">
+      <span class="value-word">Confiança</span>
+      <span class="value-tag">para gerações</span>
+    </div>
+    <div class="value-row">
+      <span class="value-word">Atendimento</span>
+      <span class="value-tag">acima da necessidade<br>do cliente</span>
+    </div>
+    <div class="value-row">
+      <span class="value-word">Gestão</span>
+      <span class="value-tag">de custos<br>eficiente</span>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery">
+    <div class="gallery-intro">
+      <p class="section-label">Galeria</p>
+      <p>
+        Antes de construir, a gente observa. Antes de executar, a gente
+        entende. Aqui na A.Metlob trabalhamos com técnica, estética e visão.
+      </p>
+    </div>
+    <div class="gallery-mosaic">
+      <div class="gallery-item g1">
+        <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=700&q=80" alt="galeria 1" />
+      </div>
+      <div class="gallery-item g2">
+        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=500&q=80" alt="galeria 2" />
+      </div>
+      <div class="gallery-item g3">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=80" alt="galeria 3" />
+      </div>
+      <div class="gallery-item g4">
+        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=500&q=80" alt="galeria 4" />
+      </div>
+      <div class="gallery-item g5">
+        <img src="https://images.unsplash.com/photo-1416331108676-a22ccb276e35?w=500&q=80" alt="galeria 5" />
+      </div>
+      <div class="gallery-item g6">
+        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&q=80" alt="galeria 6" />
+      </div>
+      <div class="gallery-item g7">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=500&q=80" alt="galeria 7" />
+      </div>
+      <div class="gallery-item g8">
+        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=500&q=80" alt="galeria 8" />
+      </div>
+      <div class="gallery-item g9">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=500&q=80" alt="galeria 9" />
+      </div>
+    </div>
+    <div class="btn-row">
+      <a href="#" class="btn-outline">Ver mais imagens</a>
+    </div>
+  </section>
+
+  <!-- AREAS -->
+  <section class="areas">
+    <p class="section-label">Áreas de atuação</p>
+
+    <div class="area-row">
+      <div class="area-info">
+        <small>Projetos</small>
+        <h3>Corporativos</h3>
+      </div>
+      <div class="area-carousel">
+        <div class="carousel-slide featured">
+          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&q=80" alt="Corporativo 1" />
+        </div>
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=500&q=80" alt="Corporativo 2" />
+        </div>
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=500&q=80" alt="Corporativo 3" />
+        </div>
+      </div>
+    </div>
+
+    <div class="area-row reverse">
+      <div class="area-info">
+        <small>Projetos</small>
+        <h3>Residenciais</h3>
+      </div>
+      <div class="area-carousel">
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=80" alt="Residencial 1" />
+        </div>
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=500&q=80" alt="Residencial 2" />
+        </div>
+        <div class="carousel-slide featured">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80" alt="Residencial 3" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact">
+    <h2>Vamos criar<br>algo juntos!</h2>
+    <form class="form-grid">
+      <input type="text"  placeholder="First Name" />
+      <input type="text"  placeholder="Last Name" />
+      <input type="email" placeholder="Email" style="grid-column:span 2;" />
+      <input type="tel"   placeholder="Phone Number" style="grid-column:span 2;" />
+      <textarea           placeholder="Message"></textarea>
+      <button type="submit" class="btn-submit">Enviar mensagem</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo logo">
+      <img src="logoAME.png" alt="A.Metlob" class="logo-svg" />
+    </div>
+    <nav class="footer-links">
+      <a href="#">Home</a>
+      <a href="#">Portfolio</a>
+      <a href="#">Galeria</a>
+      <a href="#">Sobre</a>
+      <a href="#">Contacto</a>
+    </nav>
+  </footer>
+
+  <script>
+    (function () {
+      const targets = [
+        { sel: '.about-img' },
+        { sel: '.about-body',            delay: 0.15 },
+        { sel: '.projects .section-label' },
+        { sel: '.project-card',          stagger: 0.1 },
+        { sel: '.value-row',             stagger: 0.1 },
+        { sel: '.gallery-intro' },
+        { sel: '.gallery-mosaic' },
+        { sel: '.area-row',              stagger: 0.12 },
+        { sel: '.contact h2' },
+        { sel: '.form-grid',             delay: 0.15 },
+        { sel: '.footer-logo' },
+        { sel: '.footer-links',          delay: 0.1 },
+      ];
+
+      targets.forEach(({ sel, stagger, delay }) => {
+        document.querySelectorAll(sel).forEach((el, i) => {
+          el.classList.add('reveal');
+          const d = stagger ? i * stagger : (delay || 0);
+          if (d) el.style.transitionDelay = d + 's';
+        });
+      });
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    })();
+  </script>
+
+</body>
+</html>
